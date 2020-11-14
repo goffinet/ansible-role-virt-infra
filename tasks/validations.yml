@@ -443,14 +443,6 @@
         - virt_infra_state not in ['running', 'shutdown', 'destroyed', 'undefined']
       changed_when: true
 
-    - name: download images
-      get_url:
-        url: "{{ hostvars[groups['kvmhost'][0]].virt_infra_distro_image_url | default(virt_infra_distro_image_url) }}/{{ virt_infra_distro_image_url }}"
-        dest: "{{ hostvars[groups['kvmhost'][0]].virt_infra_host_image_path | default(virt_infra_host_image_path) }}/{{ virt_infra_distro_image }}"
-      delegate_to: "{{ groups['kvmhost'][0] }}"
-      when:
-        - inventory_hostname not in groups['kvmhost']
-
     - name: "KVM host: Test for distro images"
       stat:
         path: "{{ hostvars[groups['kvmhost'][0]].virt_infra_host_image_path | default(virt_infra_host_image_path) }}/{{ virt_infra_distro_image }}"
