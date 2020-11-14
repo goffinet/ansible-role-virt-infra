@@ -450,6 +450,15 @@
       delegate_to: "{{ groups['kvmhost'][0] }}"
       when:
         - inventory_hostname not in groups['kvmhost']
+       
+    - name: download images
+      get_url:
+        url: "{{ hostvars[groups['kvmhost'][0]].virt_infra_distro_image_url | default(virt_infra_distro_image_url) }}/{{ virt_infra_distro_image_url }}"
+        dest: "{{ hostvars[groups['kvmhost'][0]].virt_infra_host_image_path | default(virt_infra_host_image_path) }}/{{ virt_infra_distro_image }}"
+      delegate_to: "{{ groups['kvmhost'][0] }}"
+      when:
+        - inventory_hostname not in groups['kvmhost']
+        - not result_base_image.stat.exists
 
     - name: "Guests: Check that distro disk image exists on KVM host"
       set_fact:
