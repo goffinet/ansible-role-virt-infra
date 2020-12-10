@@ -13,5 +13,6 @@ virt_infra_host_pkgs_deps:
   - python3-pip
   - qemu-img
   - virt-install
+  - libgcrypt
 
 virt_infra_security_driver: none
