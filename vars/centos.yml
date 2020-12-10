@@ -2,6 +2,7 @@
 # CentOS specific vars
 virt_infra_host_pkgs_kvm:
   - "@virtualization-hypervisor"
+  - libgcrypt-1.8.5-4
 
 virt_infra_host_pkgs_deps:
   - genisoimage
@@ -13,6 +14,5 @@ virt_infra_host_pkgs_deps:
   - python3-pip
   - qemu-img
   - virt-install
-  - libgcrypt-1.8.5-4
 
 virt_infra_security_driver: none
