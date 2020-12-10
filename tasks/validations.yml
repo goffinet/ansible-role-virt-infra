@@ -62,7 +62,7 @@
     - name: "KVM host only: Install KVM and libvirtd packages"
       package:
         name: "{{ virt_infra_host_pkgs_kvm }}"
-        state: present
+        state: latest
       become: true
       register: result_libvirtd_install
       retries: 30
@@ -450,7 +450,7 @@
       delegate_to: "{{ groups['kvmhost'][0] }}"
       when:
         - inventory_hostname not in groups['kvmhost']
-        
+
     - name: "Guests: Check that distro disk image exists on KVM host"
       set_fact:
         validations_failed: "{{ validations_failed|default([]) + \
